@@ -2,7 +2,7 @@
 This folder contains the work done for the project of the course Computational Statistics a.y 2022/2023, MSc. Mathematical Engineering, Politecnico di Milano.  
 
 # Installation:  
-This project relies on the Python Package [`uncertainpy`](https://github.com/simetenn/uncertainpy).  
+This project relies on the Python Package [`uncertainpy`](https://github.com/simetenn/compstat_uq).  
 The reproducibility of the analysis can be done cloning this repo:
 
 ```shell
