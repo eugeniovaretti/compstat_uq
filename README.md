@@ -6,9 +6,9 @@ This project relies on the Python Package [`uncertainpy`](https://github.com/sim
 The reproducibility of the analysis can be done cloning this repo:
 
 ```shell
-$ git clone https://github.com/eugeniovaretti/compstat_uq
-$ cd /path/to/uncertainpy
-$ python setup.py install
+git clone https://github.com/eugeniovaretti/compstat_uq
+cd /path/to/uncertainpy
+python setup.py install
 ```
 
 # Authors  
