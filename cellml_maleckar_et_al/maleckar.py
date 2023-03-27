@@ -516,6 +516,8 @@ def custom_piecewise(cases):
     """Compute result of a piecewise function"""
     return select(cases[0::2],cases[1::2])
 
+def denormalize(value, min_value, max_value):
+    return (value * (max_value - min_value)) + min_value
 
 def maleckar_model( #V_0=-74.031982,
                     PNa=0.0018,
@@ -541,6 +543,7 @@ def maleckar_model( #V_0=-74.031982,
                     conc_Ca2=5.4,
                     conc_K=1.8 ):
 
+    
     def init_p():
         constants = [0.0] * sizeConstants; 
         states = [0.0] * sizeStates;
@@ -630,6 +633,93 @@ def maleckar_model( #V_0=-74.031982,
     
     
     """Solve model with ODE solver"""
+#     def init_p():
+#         constants = [0.0] * sizeConstants; 
+#         states = [0.0] * sizeStates;
+
+#         states[0] = -74.031982
+#         constants[0] = 8314.0
+#         constants[1] = 306.15
+#         constants[2] = 96487.0
+#         constants[3] = denormalize(Cm, 37.5,62.5)
+#         constants[4] = 0
+#         constants[5] = 1
+#         constants[6] = 0.006
+#         constants[7] = -15
+#         constants[8] = denormalize(PNa,  0.0009, 0.0027)
+#         states[1] = 130.022096
+#         states[2] = 8.516766
+#         states[3] = 0.003289
+#         states[4] = 0.877202
+#         states[5] = 0.873881
+#         constants[9] = denormalize(GCa_L,  3.375, 10.125)
+#         constants[10] = 60
+#         constants[11] = 0.025
+#         states[6] = 7.1e-5
+#         states[7] = 0.000014
+#         states[8] = 0.998597
+#         states[9] = 0.998586
+#         constants[12] = denormalize(Gt, 4.125, 12.375)
+#         states[10] = 5.560224
+#         states[11] = 129.485991
+#         states[12] = 0.001089
+#         states[13] = 0.948597
+#         constants[13] = denormalize(GKur,  1.125, 3.375)
+#         states[14] = 0.000367
+#         states[15] = 0.96729
+#         constants[14] = denormalize(GK1, 2.325, 3.875)
+#         constants[15] = denormalize(GKr, 0.250, 0.750)
+#         constants[16] = denormalize(GKs, 0.50, 1.50) 
+#         states[16] = 0.004374
+#         states[17] = 0.000053
+#         constants[17] = denormalize(Gb_Na, 0.303, 0.909)
+#         constants[18] = denormalize(Gb_Ca, 0.0295, 0.0885)
+#         states[18] = 1.815768
+#         states[19] = 6.5e-5
+#         constants[19] = 1
+#         constants[20] = denormalize(NaKMax, 34.27, 102.82)
+#         constants[21] = 36.4829
+#         constants[22] = denormalize(ip_CaMax, 2.0, 6.0)
+#         constants[23] = 0.0002
+#         constants[24] = denormalize(KNaCa,  0.0375, 0.1125)
+#         constants[25] = 0.0003
+#         constants[26] = 0.45
+#         constants[27] = 1e-24
+#         constants[28] = 0
+#         constants[29] = 0.005884
+#         constants[30] = 0.00011768
+#         constants[31] = 0.01
+#         states[20] = 0.026766
+#         states[21] = 0.012922
+#         states[22] = 0.190369
+#         states[23] = 0.714463
+#         states[24] = 1.38222
+#         constants[32] = 2.5
+#         constants[33] = 0.000800224
+#         constants[34] = 14.3
+#         constants[35] = 10
+#         constants[36] = 24.7
+#         constants[37] = denormalize(conc_Na,  126.0, 154.0)
+#         constants[38] = denormalize(conc_Ca2, 4.86, 5.94)
+#         constants[39] = denormalize(conc_K, 1.62, 1.98)
+#         constants[40] = denormalize(iupMax,  1400, 4300)
+#         constants[41] = denormalize(Kcyca, 0.00015, 0.00045)
+#         constants[42] = denormalize(Ksrca,  0.25, 0.75)
+#         constants[43] = denormalize(Kxcs,  0.2, 0.6)
+#         constants[44] = denormalize(alpha_rel, 100000, 300000)
+#         states[25] = 0.632613
+#         states[26] = 0.649195
+#         constants[45] = 0.0003969
+#         constants[46] = 0.0000441
+#         constants[47] = 0.815
+#         states[27] = 0.431547
+#         states[28] = 0.470055
+#         states[29] = 0.002814
+#         constants[48] = denormalize(tao_tr,  0.005, 0.015)
+#         constants[49] = 0.0003
+#         constants[50] = 0.003
+#         return (states, constants)
+    
     from scipy.integrate import ode
     import numpy as np
     # Initialise constants and state variables
@@ -642,7 +732,7 @@ def maleckar_model( #V_0=-74.031982,
     # Construct ODE object to solve
     time = voi
     r = ode(computeRates)
-    r.set_integrator('vode', method='bdf', atol=1e-06, rtol=1e-06, max_step=1)
+    r.set_integrator('vode', method='bdf', atol=1e-06, rtol=1e-06, max_step=1) #nsteps=1e8
     r.set_initial_value(init_states, voi[0])
     r.set_f_params(constants)
 
