@@ -13,5 +13,5 @@ python setup.py install
 
 # Authors  
 - Carnevali Davide ([@DavideCarne](https://github.com/DavideCarne))
-- Serra Davide ()
+- Serra Davide ([@davidesserra](https://github.com/davidesserra))
 - Varetti Eugenio ([@eugeniovaretti](https://github.com/eugeniovaretti))
