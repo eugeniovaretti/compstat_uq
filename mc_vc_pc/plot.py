@@ -15,7 +15,7 @@ fontsize = 8
 ticklabelsize = 8
 linewidth = 1
 figsize = (figure_width, figure_width*0.4)
-figure_format = ".eps"
+figure_format = ".jpg"
 dpi = 300
 
 # Load the analysed data
@@ -47,7 +47,7 @@ with h5py.File("pc_mc.h5", "r") as f:
 
 # Plotting
 
-set_latex_font()
+# set_latex_font()
 set_style("seaborn-darkgrid")
 
 fig, axes = plt.subplots(ncols=2, figsize=figsize, sharey=True, constrained_layout=True)
@@ -94,7 +94,7 @@ prettyPlot(mc_sobol_evaluations_6, mc_sobol_errors_6, linewidth=linewidth, nr_co
 
 
 
-axes[1].set_title("B) Eleven uncertain parameters", fontsize=titlesize)
+axes[1].set_title("B) Six uncertain parameters", fontsize=titlesize)
 axes[1].set_ylabel("Average absolute relative\nerror over time, $\\varepsilon$", fontsize=labelsize)
 axes[1].set_xlabel("Number of model evaluations, $N_s$", fontsize=labelsize)
 axes[1].set_yscale("log")
